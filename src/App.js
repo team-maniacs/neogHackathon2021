@@ -6,7 +6,8 @@ import {
   BrowserRouter as Router, Routes,
   Route
 } from 'react-router-dom';
-import Chat from './components/Chat';
+
+import Talk from './components/Talk';
 
 
 function App() {
@@ -17,7 +18,7 @@ function App() {
         <Sidebar />
         <Routes>
           <Route path="/room/:roomId">
-            <Chat />
+            <Talk />
           </Route>
           <Route path="/">
             <h1>Welcome</h1>

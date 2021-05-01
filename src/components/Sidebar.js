@@ -1,11 +1,10 @@
-import "../styles/sidebar.css"
+import React, { useEffect, useState } from 'react';
 import db from "../firebase"
 
-import React, { useEffect, useState } from 'react';
-import {
-    Routes,
-    Route
-} from 'react-router-dom';
+import "../styles/sidebar.css"
+import AddRoom from './AddRoom';
+
+import SidebarRooms from "./SidebarRooms"
 
 const Sidebar = () => {
 
@@ -24,11 +23,8 @@ const Sidebar = () => {
 
     return (
         <div className="sidebar">
-            {rooms.map((room) =>
-                <div>
-                    {room.name}
-                </div>
-            )}
+            <AddRoom />
+            <SidebarRooms rooms={rooms} />
         </div>
     )
 }
