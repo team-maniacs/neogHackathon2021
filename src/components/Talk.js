@@ -3,6 +3,7 @@ import "../styles/talk.css";
 import { useParams } from "react-router-dom";
 import db from '../firebase';
 import Message from './Message';
+import TextInput from './TextInput';
 
 const Talk = () => {
 
@@ -43,6 +44,7 @@ const Talk = () => {
                     />
                 ))}
             </div>
+            <TextInput room={roomInfo?.name} id={roomId} />
         </div>
     )
 }
