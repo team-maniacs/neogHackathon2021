@@ -18,7 +18,7 @@ const SidebarRooms = ({ rooms }) => {
         <div>
             <div className="current-rooms">
                 {rooms.map((room) =>
-                    <div>
+                    <div key={room.id}>
                         {room.name}
                         <button onClick={() => selectRoom(room.id)}>Enter Room</button>
                     </div>

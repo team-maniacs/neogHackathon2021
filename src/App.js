@@ -1,3 +1,4 @@
+import React from 'react';
 
 import './App.css';
 import Header from './components/Header';
@@ -8,24 +9,32 @@ import {
 } from 'react-router-dom';
 
 import Talk from './components/Talk';
+import Login from './components/Login';
+import { useAuth } from './context/user-context';
 
 
 function App() {
+
+  const { user } = useAuth();
+
   return (
     <div className="App">
-      <Header />
       <Router>
-        <Sidebar />
-        <Routes>
-          <Route path="/room/:roomId">
-            <Talk />
-          </Route>
-          <Route path="/">
-            <h1>Welcome</h1>
-          </Route>
-        </Routes>
+        {!user ? <Login /> :
+          <>
+            <Header />
+            <Sidebar />
+            <Routes>
+              <Route path="/room/:roomId">
+                <Talk />
+              </Route>
+              <Route path="/">
+                <h1>Welcome</h1>
+              </Route>
+            </Routes>
+          </>
+        }
       </Router>
-
     </div>
   );
 }
