@@ -3,7 +3,6 @@ import "../styles/chat.css";
 import "../styles/talk.css";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import "../styles/talk.css";
 import db from "../firebase";
 import Message from "./Message";
 import TextInput from "./TextInput";
@@ -73,9 +72,8 @@ const Talk = () => {
   return (
     <div className='app-content'>
       <Header page={"Chat"} />
-      <div className='chat-header'>
-        <h1>Topic: {roomInfo?.name}</h1>
-
+      <h1 className='chat-header'>Topic: {roomInfo?.name}</h1>
+      <div className='chat-section'>
         <div className='message-section' ref={(e) => (messageRef = e)}>
           {filteredChatMessages.map(
             ({

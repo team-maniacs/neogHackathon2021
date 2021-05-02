@@ -1,13 +1,32 @@
 .message-section {
-  margin-bottom: 3rem;
-  padding-bottom: 3rem;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+  margin-top: 1rem;
 }
 .send-icon {
   cursor: pointer;
 }
+<<<<<<< HEAD
 .req-user {
   background-color: black;
   position: fixed;
   top: 5rem;
   color: white;
+=======
+.chat-header {
+  background-color: #675e5e;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  border: 1px solid #675e5e;
+}
+@media only screen and (min-width: 600px) {
+  .chat-section {
+    margin: 0rem 20rem;
+  }
+  .chat-header {
+    margin: 0rem 20rem;
+  }
+>>>>>>> f1e57b1efac2153673f2e3843b9a944255dfa814
 }

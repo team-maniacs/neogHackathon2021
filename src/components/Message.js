@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useRooms } from "../room-context";
+
 import "../styles/message.css";
 import MessageEditModal from "./MessageEditModal";
 
@@ -14,11 +14,10 @@ const Message = ({
   roomid,
 }) => {
   const [showModal, setShowModal] = useState(false);
-  const { messageModal } = useRooms();
+
   const messageRef = useRef(null);
   useEffect(() => {
     document.addEventListener("click", (e) => {
-      // if (messageModal.current && !messageModal.current.contains(e.target))
       setShowModal(false);
     });
     console.log(messageRef.current);
@@ -28,17 +27,11 @@ const Message = ({
     });
   });
   return (
-    <div className='message'>
-      <img src={userImage} alt='' style={{ height: "50px", width: "50px" }} />
+    <div className='message-box'>
+      <img className='message-img' src={userImage} alt='' />
 
-      <div
-        id={id}
-        className='message-info'
-
-        // roomDispatch({ type: "SHOW_MESSAGE_OPTIONS" })}
-        // onClick={()=>roomDispatch({type:"HIDE_MESSAGE_OPTIONS"})}
-      >
-        <div>
+      <div id={id} className='message'>
+        <div className='message-replay'>
           {replyToMessage && (
             <p>
               {" "}
@@ -46,17 +39,21 @@ const Message = ({
             </p>
           )}
         </div>
-        <h4
+        <div className='message-details'>
+          <div className='message-owner'>{user}</div>
+          <div className='message-timing'>
+            {new Date(timestamp?.toDate()).toUTCString()}
+          </div>
+        </div>
+        <div
           ref={messageRef}
+          className='message-text'
           onContextMenu={(e) => {
             setShowModal(true);
             e.preventDefault();
           }}>
           {message}
-        </h4>
-        <p>
-          {user} {new Date(timestamp?.toDate()).toUTCString()}
-        </p>
+        </div>
         {showModal && (
           <MessageEditModal id={id} chats={chats} roomid={roomid} />
         )}

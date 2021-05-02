@@ -17,7 +17,7 @@ const Header = ({ page }) => {
   return (
     <header className='header'>
       <FontAwesomeIcon icon={faHome} />
-      Chaupal
+      <h1 className='brandName'>Chaupal</h1>
       <div className='search-bar'>
         <input
           type='search'

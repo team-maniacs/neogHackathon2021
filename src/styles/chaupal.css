@@ -1,0 +1,62 @@
+.room-box {
+  margin: 2rem;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.discussion-room {
+  width: 15rem;
+  height: 7rem;
+  padding: 1rem;
+  margin: 1.5rem;
+  /* border: 1px solid red; */
+  border-radius: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  background-color: #675e5e;
+  color: #ffffff;
+}
+
+.room-header {
+  display: flex;
+  flex-direction: row;
+  padding: 1rem;
+}
+
+.room-info {
+  display: flex;
+  flex-direction: column;
+  padding-left: 1rem;
+}
+
+.room-time {
+  font-weight: 400;
+  opacity: 70%;
+  text-align: start;
+}
+
+.room-img {
+  width: 3rem;
+  height: 3rem;
+  background-color: red;
+  border-radius: 100%;
+}
+
+.room-join-btn {
+  width: 60%;
+  display: flex;
+  align-self: flex-end;
+  text-align: center;
+  margin-right: 5%;
+  font-size: 16px;
+}
+
+.new-room {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.new-room-input {
+  margin-top: 1.5rem;
+}

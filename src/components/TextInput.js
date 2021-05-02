@@ -87,32 +87,32 @@ const TextInput = ({ room, id, chats }) => {
       });
   }, [editRights, setEditRights, rooms, user, id]);
   return (
-    <div className='input-box'>
-      <form onSubmit={sendMessage}>
-        {replyFlag && <ReplyToMessage chats={chats} />}
-        <input
-          className='input-message'
-          value={input}
-          placeholder={`Send in ${room}`}
-          onChange={(e) => setInput(e.target.value)}
-          disabled={editRights}
+    // <div className='input-box'>
+    <form className='message-form' onSubmit={sendMessage}>
+      {replyFlag && <ReplyToMessage chats={chats} />}
+      <input
+        className='input-message'
+        value={input}
+        placeholder={`Send in ${room}`}
+        onChange={(e) => setInput(e.target.value)}
+        disabled={editRights}
+      />
+      {!editRights ? (
+        <FontAwesomeIcon
+          icon={faPaperPlane}
+          className='send-icon'
+          disabled={input ? false : true}
+          onClick={(e) => sendMessage(e)}
         />
-        {!editRights ? (
-          <FontAwesomeIcon
-            icon={faPaperPlane}
-            className='send-icon'
-            disabled={input ? false : true}
-            onClick={(e) => sendMessage(e)}
-          />
-        ) : (
-          <FontAwesomeIcon
-            icon={faHandPaper}
-            className='raise-hand-icon'
-            onClick={() => getEditAccess()}
-          />
-        )}
-      </form>
-    </div>
+      ) : (
+        <FontAwesomeIcon
+          icon={faHandPaper}
+          className='raise-hand-icon'
+          onClick={() => getEditAccess()}
+        />
+      )}
+    </form>
+    // </div>
   );
 };
 

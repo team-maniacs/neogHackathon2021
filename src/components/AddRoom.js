@@ -34,10 +34,17 @@ const AddRoom = () => {
   };
 
   return (
-    <div className='new-room'>
+    <div className='discussion-room new-room'>
       <label>Create Room</label>
-      <input type='text' onChange={(e) => setTopic(e.target.value)} />
-      <button onClick={addRoom}>+ create</button>
+      <input
+        className='new-room-input'
+        type='text'
+        placeholder='Enter room name'
+        onChange={(e) => setTopic(e.target.value)}
+      />
+      <button className='room-join-btn' onClick={addRoom}>
+        create room
+      </button>
     </div>
   );
 };

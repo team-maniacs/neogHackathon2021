@@ -3,10 +3,29 @@
   height: 90vh;
   width: 100%;
 }
+body {
+  background-color: #3f3232;
+}
 .body {
   height: 100%;
 }
 .app-content {
   margin-top: 4rem;
   height: 100%;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+nav,
+ul,
+p,
+div,
+button {
+  margin: 0;
+  padding: 0;
 }
