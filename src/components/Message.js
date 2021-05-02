@@ -1,3 +1,5 @@
+import { faThumbtack } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useRef, useState } from "react";
 
 import "../styles/message.css";
@@ -20,7 +22,7 @@ const Message = ({
     document.addEventListener("click", (e) => {
       setShowModal(false);
     });
-    console.log(messageRef.current);
+
     document.addEventListener("contextMenu", (e) => {
       // if (messageRef.current && !messageRef.current.contains(e.target))
       setShowModal(false);
@@ -54,6 +56,7 @@ const Message = ({
           }}>
           {message}
         </div>
+
         {showModal && (
           <MessageEditModal id={id} chats={chats} roomid={roomid} />
         )}

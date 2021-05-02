@@ -6,7 +6,6 @@ const MessageEditModal = ({ roomid, id, chats }) => {
   const {
     data: { message, user, userImage, timestamp },
   } = chats.find(({ id: chatId }) => chatId === id);
-  console.log(chats);
 
   const deleteMessage = async () => {
     try {

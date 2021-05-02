@@ -62,3 +62,6 @@
 .show-user-menu {
   display: block;
 }
+.home-icon {
+  cursor: pointer;
+}

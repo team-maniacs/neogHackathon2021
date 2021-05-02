@@ -36,7 +36,7 @@ export const manageRooms = (state, action) => {
 };
 const RoomProvider = ({ children }) => {
   const { roomId } = useParams();
-  console.log({ roomId });
+
   const messageModal = useRef(null);
   const [roomState, roomDispatch] = useReducer(manageRooms, {
     rooms: [],
@@ -47,7 +47,7 @@ const RoomProvider = ({ children }) => {
     pinnedMessage: [],
     deleteMessage: null,
   });
-  console.log(roomState);
+
   useEffect(() => {
     db.collection("rooms").onSnapshot((snap) =>
       roomDispatch({

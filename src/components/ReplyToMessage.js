@@ -7,7 +7,7 @@ const ReplyToMessage = ({ chats }) => {
     },
   } = useRooms();
   const chat = chats.find(({ id: chatId }) => chatId === id);
-  console.log(chat);
+
   return (
     <div className='reply_to_message'>
       <p>

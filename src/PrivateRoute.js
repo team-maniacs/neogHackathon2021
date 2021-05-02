@@ -4,7 +4,6 @@ import { useEffect } from "react";
 export function PrivateRoute({ path, ...props }) {
   const { login } = useAuth();
   const navigate = useNavigate();
-  console.log({ path, login });
   useEffect(() => {
     const getLoginStatus = JSON.parse(localStorage?.getItem("login"));
 

@@ -68,7 +68,7 @@ const Talk = () => {
   const filteredChatMessages = roomMessages.filter(({ data: { message } }) =>
     message.toLowerCase().includes(searchChatText.toLowerCase())
   );
-  console.log({ roomMessages, filteredChatMessages });
+
   return (
     <div className='app-content'>
       <Header page={"Chat"} />
