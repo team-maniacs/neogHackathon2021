@@ -22,3 +22,7 @@
   right: 0;
   bottom: 1rem;
 }
+.reply_to_message {
+  position: fixed;
+  bottom: 3rem;
+}

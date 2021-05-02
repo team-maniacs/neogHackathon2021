@@ -1,4 +1,10 @@
-import { createContext, useContext, useEffect, useReducer } from "react";
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useReducer,
+  useRef,
+} from "react";
 import db from "./firebase";
 const RoomContext = createContext();
 export const manageRooms = (state, action) => {
@@ -11,17 +17,29 @@ export const manageRooms = (state, action) => {
       return { ...state, searchRoomText: action.value };
     case "SEARCH_CHAT_TEXT":
       return { ...state, searchChatText: action.value };
+    case "SHOW_MESSAGE_OPTIONS":
+      return { ...state, showMessageOptions: !state.showMessageOptions };
+    case "REPLY_TO_MESSAGE":
+      return {
+        ...state,
+        replyToMessage: { id: action.value.id, flag: action.value.flag },
+      };
     default:
       return state;
   }
 };
 const RoomProvider = ({ children }) => {
+  const messageModal = useRef(null);
   const [roomState, roomDispatch] = useReducer(manageRooms, {
     rooms: [],
     searchRoomText: "",
     searchChatText: "",
+    editMessage: { id: null, flag: false },
+    replyToMessage: { id: null, flag: false },
+    pinnedMessage: [],
+    deleteMessage: null,
   });
-
+  console.log(roomState);
   useEffect(() => {
     db.collection("rooms").onSnapshot((snap) =>
       roomDispatch({
@@ -39,7 +57,8 @@ const RoomProvider = ({ children }) => {
   );
 
   return (
-    <RoomContext.Provider value={{ roomState, roomDispatch, filteredRooms }}>
+    <RoomContext.Provider
+      value={{ roomState, roomDispatch, filteredRooms, messageModal }}>
       {children}
     </RoomContext.Provider>
   );

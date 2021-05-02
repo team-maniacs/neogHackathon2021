@@ -31,15 +31,18 @@ const Talk = () => {
       .collection("messages")
       .orderBy("timestamp", "asc")
       .onSnapshot((snap) =>
-        setRoomMessages(snap.docs.map((doc) => doc.data()))
+        setRoomMessages(
+          snap.docs.map((doc) => ({ id: doc.id, data: doc.data() }))
+        )
       );
   }, [roomId]);
   console.log(roomInfo);
   console.log(roomMessages);
 
-  const filteredChatMessages = roomMessages.filter(({ message }) =>
+  const filteredChatMessages = roomMessages.filter(({ data: { message } }) =>
     message.toLowerCase().includes(searchChatText.toLowerCase())
   );
+
   return (
     <div className='app-content'>
       <Header page={"Chat"} />
@@ -48,19 +51,28 @@ const Talk = () => {
 
         <div className='message-section'>
           {filteredChatMessages.map(
-            ({ message, user, timestamp, userImage }) => (
+            ({
+              id,
+              data: { replyToMessage, message, user, timestamp, userImage },
+            }) => (
               <Message
+                id={id}
                 key={timestamp}
                 message={message}
                 user={user}
                 timestamp={timestamp}
                 userImage={userImage}
+                replyToMessage={replyToMessage}
               />
             )
           )}
         </div>
-
-        <TextInput room={roomInfo?.name} id={roomId} />
+        {/* {flag && <ReplyToMessage chats={filteredChatMessages} />} */}
+        <TextInput
+          room={roomInfo?.name}
+          id={roomId}
+          chats={filteredChatMessages}
+        />
       </div>
     </div>
   );
