@@ -20,10 +20,10 @@ const TextInput = ({ room, id, chats }) => {
     },
     roomDispatch,
   } = useRooms();
-  console.log({ rooms });
+
   const chat = chats.find(({ id: chatId }) => chatId === replyId);
   const editChat = chats.find(({ id: chatId }) => chatId === editId);
-  console.log({ editChat });
+
   useEffect(() => {
     if (editFlag) {
       setInput(editChat.data.message);

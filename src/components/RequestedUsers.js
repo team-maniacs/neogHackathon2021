@@ -1,7 +1,5 @@
 import db from "../firebase";
 const RequestedUsers = ({ users, roomId }) => {
-  console.log({ users });
-
   const giveAccess = ({ id, name, userId }) => {
     db.collection("rooms").doc(roomId).collection("users").doc(id).update({
       isRequested: false,
