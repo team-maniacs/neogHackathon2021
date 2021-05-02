@@ -1,0 +1,35 @@
+.chat-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  background-color: #675e5e;
+}
+.message-form {
+  bottom: 0;
+  display: flex;
+  flex-direction: row;
+  border-radius: 1rem;
+  background-color: #ffffff;
+  justify-content: center;
+}
+
+.input-message {
+  width: 100%;
+  outline: none;
+  padding: 0.5rem;
+  border-radius: 1rem;
+  border: none;
+}
+.send-icon {
+  margin: 1rem;
+}
+.reply_to_message {
+  position: fixed;
+  bottom: 3rem;
+}
+.raise-hand-icon {
+  position: absolute;
+  right: 0;
+  bottom: 1rem;
+}
