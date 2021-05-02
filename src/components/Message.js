@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useRooms } from "../room-context";
 import "../styles/message.css";
 import MessageEditModal from "./MessageEditModal";
@@ -10,13 +10,21 @@ const Message = ({
   user,
   userImage,
   replyToMessage,
+  chats,
+  roomid,
 }) => {
   const [showModal, setShowModal] = useState(false);
   const { messageModal } = useRooms();
+  const messageRef = useRef(null);
   useEffect(() => {
     document.addEventListener("click", (e) => {
-      if (messageModal.current && !messageModal.current.contains(e.target))
-        setShowModal(false);
+      // if (messageModal.current && !messageModal.current.contains(e.target))
+      setShowModal(false);
+    });
+    console.log(messageRef.current);
+    document.addEventListener("contextMenu", (e) => {
+      // if (messageRef.current && !messageRef.current.contains(e.target))
+      setShowModal(false);
     });
   });
   return (
@@ -39,6 +47,7 @@ const Message = ({
           )}
         </div>
         <h4
+          ref={messageRef}
           onContextMenu={(e) => {
             setShowModal(true);
             e.preventDefault();
@@ -48,7 +57,9 @@ const Message = ({
         <p>
           {user} {new Date(timestamp?.toDate()).toUTCString()}
         </p>
-        {showModal && <MessageEditModal id={id} />}
+        {showModal && (
+          <MessageEditModal id={id} chats={chats} roomid={roomid} />
+        )}
       </div>
     </div>
   );

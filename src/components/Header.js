@@ -1,6 +1,6 @@
 import "../styles/header.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars, faSearch } from "@fortawesome/free-solid-svg-icons";
+import { faHome, faSearch } from "@fortawesome/free-solid-svg-icons";
 import React, { useState } from "react";
 import { useAuth } from "../context/user-context";
 import { useRooms } from "../room-context";
@@ -16,7 +16,7 @@ const Header = ({ page }) => {
   };
   return (
     <header className='header'>
-      <FontAwesomeIcon icon={faBars} />
+      <FontAwesomeIcon icon={faHome} />
       Chaupal
       <div className='search-bar'>
         <input

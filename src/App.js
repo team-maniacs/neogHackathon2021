@@ -1,13 +1,19 @@
 import "./App.css";
 
 import Sidebar from "./components/Sidebar";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  NavLink,
+} from "react-router-dom";
 
 import Talk from "./components/Talk";
 import React from "react";
 
 import Login from "./components/Login";
 import { useAuth } from "./context/user-context";
+import { PrivateRoute } from "./PrivateRoute";
 
 function App() {
   const { user } = useAuth();
@@ -19,13 +25,19 @@ function App() {
           <Login />
         ) : (
           <>
-            <Sidebar />
             <Routes>
-              <Route path='/room/:roomId'>
+              <Route path='/login' element={<Login />} />
+              <PrivateRoute path='/user' element={<Sidebar />} />
+              <PrivateRoute path='/room/:roomId'>
                 <Talk />
-              </Route>
+              </PrivateRoute>
               <Route path='/'>
-                <h1>Welcome</h1>
+                <div>
+                  <h1>Welcome</h1>
+                  <NavLink to='/login'>
+                    <button>Login</button>
+                  </NavLink>
+                </div>
               </Route>
             </Routes>
           </>

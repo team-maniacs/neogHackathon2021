@@ -5,3 +5,9 @@
 .send-icon {
   cursor: pointer;
 }
+.req-user {
+  background-color: black;
+  position: fixed;
+  top: 5rem;
+  color: white;
+}

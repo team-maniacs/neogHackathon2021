@@ -9,15 +9,28 @@ import Message from "./Message";
 import TextInput from "./TextInput";
 import Header from "./Header";
 import { useRooms } from "../room-context";
-
+import { useRef } from "react";
+import { useAuth } from "../context/user-context";
+import RequestedUsers from "./RequestedUsers";
 const Talk = () => {
+  let messageRef = useRef(null);
   const { roomId } = useParams();
-  console.log(roomId);
+  const { user } = useAuth();
   const {
     roomState: { searchChatText },
   } = useRooms();
   const [roomInfo, setRoomInfo] = useState(null);
   const [roomMessages, setRoomMessages] = useState([]);
+  const [requestedState, setRequestedState] = useState([]);
+  const scrollToBottom = () => {
+    const chat = messageRef;
+
+    chat.scrollIntoView({
+      behavior: "smooth",
+      block: "end",
+      inline: "nearest",
+    });
+  };
 
   useEffect(() => {
     if (roomId) {
@@ -28,6 +41,20 @@ const Talk = () => {
 
     db.collection("rooms")
       .doc(roomId)
+      .onSnapshot(
+        (snap) =>
+          user.uid === snap.data().host &&
+          db
+            .collection("rooms")
+            .doc(roomId)
+            .collection("users")
+            .onSnapshot((snapp) => {
+              setRequestedState(snapp.docs);
+            })
+      );
+
+    db.collection("rooms")
+      .doc(roomId)
       .collection("messages")
       .orderBy("timestamp", "asc")
       .onSnapshot((snap) =>
@@ -35,38 +62,41 @@ const Talk = () => {
           snap.docs.map((doc) => ({ id: doc.id, data: doc.data() }))
         )
       );
-  }, [roomId]);
-  console.log(roomInfo);
-  console.log(roomMessages);
-
+  }, [roomId, user]);
+  useEffect(() => {
+    scrollToBottom();
+  }, [roomMessages]);
   const filteredChatMessages = roomMessages.filter(({ data: { message } }) =>
     message.toLowerCase().includes(searchChatText.toLowerCase())
   );
-
+  console.log({ roomMessages, filteredChatMessages });
   return (
     <div className='app-content'>
       <Header page={"Chat"} />
       <div className='chat-header'>
         <h1>Topic: {roomInfo?.name}</h1>
 
-        <div className='message-section'>
+        <div className='message-section' ref={(e) => (messageRef = e)}>
           {filteredChatMessages.map(
             ({
               id,
               data: { replyToMessage, message, user, timestamp, userImage },
             }) => (
               <Message
+                roomid={roomId}
                 id={id}
-                key={timestamp}
+                key={id}
                 message={message}
                 user={user}
                 timestamp={timestamp}
                 userImage={userImage}
                 replyToMessage={replyToMessage}
+                chats={filteredChatMessages}
               />
             )
           )}
         </div>
+        <RequestedUsers users={requestedState} roomId={roomId} />
         {/* {flag && <ReplyToMessage chats={filteredChatMessages} />} */}
         <TextInput
           room={roomInfo?.name}

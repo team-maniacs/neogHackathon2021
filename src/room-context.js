@@ -5,6 +5,7 @@ import {
   useReducer,
   useRef,
 } from "react";
+import { useParams } from "react-router";
 import db from "./firebase";
 const RoomContext = createContext();
 export const manageRooms = (state, action) => {
@@ -24,11 +25,18 @@ export const manageRooms = (state, action) => {
         ...state,
         replyToMessage: { id: action.value.id, flag: action.value.flag },
       };
+    case "EDIT_MESSAGE":
+      return {
+        ...state,
+        editMessage: { id: action.value.id, flag: action.value.flag },
+      };
     default:
       return state;
   }
 };
 const RoomProvider = ({ children }) => {
+  const { roomId } = useParams();
+  console.log({ roomId });
   const messageModal = useRef(null);
   const [roomState, roomDispatch] = useReducer(manageRooms, {
     rooms: [],
@@ -47,6 +55,8 @@ const RoomProvider = ({ children }) => {
         value: snap.docs.map((doc) => ({
           id: doc.id,
           name: doc.data().name,
+          host: doc.data().host,
+          users: doc.data().users,
         })),
       })
     );
