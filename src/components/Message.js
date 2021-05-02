@@ -20,17 +20,17 @@ const Message = ({
     });
   });
   return (
-    <div className='message'>
-      <img src={userImage} alt='' style={{ height: "50px", width: "50px" }} />
+    <div className="message-box">
+      <img className="message-img" src={userImage} alt="" />
 
       <div
         id={id}
-        className='message-info'
+        className="message"
 
         // roomDispatch({ type: "SHOW_MESSAGE_OPTIONS" })}
         // onClick={()=>roomDispatch({type:"HIDE_MESSAGE_OPTIONS"})}
       >
-        <div>
+        <div className="message-replay">
           {replyToMessage && (
             <p>
               {" "}
@@ -38,16 +38,21 @@ const Message = ({
             </p>
           )}
         </div>
-        <h4
+        <div className="message-details">
+          <div className="message-owner">{user}</div>
+          <div className="message-timing">
+            {new Date(timestamp?.toDate()).toUTCString()}
+          </div>
+        </div>
+        <div
+          className="message-text"
           onContextMenu={(e) => {
             setShowModal(true);
             e.preventDefault();
-          }}>
+          }}
+        >
           {message}
-        </h4>
-        <p>
-          {user} {new Date(timestamp?.toDate()).toUTCString()}
-        </p>
+        </div>
         {showModal && <MessageEditModal id={id} />}
       </div>
     </div>

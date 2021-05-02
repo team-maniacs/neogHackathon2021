@@ -46,23 +46,23 @@ const TextInput = ({ room, id, chats }) => {
   };
 
   return (
-    <div className='input-box'>
-      <form onSubmit={sendMessage}>
-        {flag && <ReplyToMessage chats={chats} />}
-        <input
-          className='input-message'
-          value={input}
-          placeholder={`Send in ${room}`}
-          onChange={(e) => setInput(e.target.value)}
-        />
-        <FontAwesomeIcon
-          icon={faPaperPlane}
-          className='send-icon'
-          disabled={input ? false : true}
-          onClick={(e) => sendMessage(e)}
-        />
-      </form>
-    </div>
+    // <div className='input-box'>
+    <form className="message-form" onSubmit={sendMessage}>
+      {flag && <ReplyToMessage chats={chats} />}
+      <input
+        className="input-message"
+        value={input}
+        placeholder={`Send in ${room}`}
+        onChange={(e) => setInput(e.target.value)}
+      />
+      <FontAwesomeIcon
+        icon={faPaperPlane}
+        className="send-icon"
+        disabled={input ? false : true}
+        onClick={(e) => sendMessage(e)}
+      />
+    </form>
+    // </div>
   );
 };
 

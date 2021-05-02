@@ -1,6 +1,6 @@
 import "../styles/header.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars, faSearch } from "@fortawesome/free-solid-svg-icons";
+import { faHome, faSearch } from "@fortawesome/free-solid-svg-icons";
 import React, { useState } from "react";
 import { useAuth } from "../context/user-context";
 import { useRooms } from "../room-context";
@@ -15,21 +15,21 @@ const Header = ({ page }) => {
       : roomDispatch({ type: "SEARCH_CHAT_TEXT", value: e.target.value });
   };
   return (
-    <header className='header'>
-      <FontAwesomeIcon icon={faBars} />
-      Chaupal
-      <div className='search-bar'>
+    <header className="header">
+      <FontAwesomeIcon icon={faHome} />
+      <h1 className="brandName">Chaupal</h1>
+      <div className="search-bar">
         <input
-          type='search'
-          placeholder='Search for Rooms'
-          className='search-box'
+          type="search"
+          placeholder="Search for Rooms"
+          className="search-box"
           onChange={(e) => findRoomOrMessage(e)}
         />
-        <FontAwesomeIcon icon={faSearch} className='search-icon' />
+        <FontAwesomeIcon icon={faSearch} className="search-icon" />
       </div>
-      <div className='user'>
+      <div className="user">
         <span onClick={() => setShowUserMenu((prevValue) => !prevValue)}>
-          <img src={user?.photoURL} alt='userimage' className='avatar' />
+          <img src={user?.photoURL} alt="userimage" className="avatar" />
         </span>
         <div class={`user-menu ${showUserMenu ? "show-user-menu" : ""}`}>
           <div>{user?.displayName}</div>
