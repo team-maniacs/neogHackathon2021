@@ -1,0 +1,12 @@
+.message-edit {
+  position: absolute;
+  background-color: black;
+  color: white;
+  padding: 0.5rem;
+  top: 0;
+  right: 0;
+}
+
+.message-info {
+  position: relative;
+}
