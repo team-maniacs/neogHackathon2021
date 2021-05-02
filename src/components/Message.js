@@ -3,7 +3,7 @@ import "../styles/message.css"
 
 const Message = ({ message, timestamp, user, userImage }) => {
     return (
-        <div className="message">
+        <div className="message" style={{ display: "flex" }}>
             <img src={userImage} alt="" style={{ height: "50px", width: "50px" }} />
             <div className="message-info">
                 <h4>{message}</h4>

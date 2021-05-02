@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useAuth } from '../context/user-context'
 import db from '../firebase'
 import firebase from "../firebase"
@@ -6,9 +6,13 @@ import '../styles/textinput.css'
 
 const TextInput = ({ room, id }) => {
 
+    const { roomId } = useRef()
     const [input, setInput] = useState("");
     const { user } = useAuth()
-    console.log(firebase.firestore)
+
+    const inputRef = useRef()
+
+
     const sendMessage = (e) => {
         e.preventDefault();
         if (id) {
@@ -18,19 +22,35 @@ const TextInput = ({ room, id }) => {
                 user: user.displayName,
                 userImage: user.photoURL
             })
+            setInput("")
         }
     }
 
+
+
+    useEffect(() => {
+        try {
+            inputRef.current.focus();
+        } catch (error) {
+            console.log(error)
+        }
+    }, [roomId])
+
     return (
-        <div>
-            <form onSubmit={sendMessage}>
-                <input
-                    value={input}
-                    placeholder={`Send in ${room}`}
-                    onChange={e => setInput(e.target.value)}
-                />
-                <button onClick={sendMessage}>send</button>
-            </form>
+        <div ref={inputRef}>
+            {user.isWriter ?
+                <form onSubmit={sendMessage}>
+                    <input
+                        value={input}
+                        placeholder={`Send in ${room}`}
+                        onChange={e => setInput(e.target.value)}
+                    />
+                    <button onClick={sendMessage}>send</button>
+                </form>
+                :
+                <button>Raise</button>
+            }
+
 
         </div>
     )

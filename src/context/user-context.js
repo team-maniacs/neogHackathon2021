@@ -25,7 +25,22 @@ const reducer = (state, action) => {
         case "SET_USER":
             return {
                 ...state,
-                user: action.payload
+                user: { ...action.payload, isHost: false, isWriter: false, requested: false }
+            }
+        case "SET_HOST":
+            return {
+                ...state,
+                user: { ...action.payload, isHost: true, isWriter: true }
+            }
+        case "SET_WRITER":
+            return {
+                ...state,
+                user: { ...action.payload, requested: true }
+            }
+        case "SET_WRITER_OFF":
+            return {
+                ...state,
+                user: { ...action.payload, isWriter: false, requested: false }
             }
         default:
             return state;
