@@ -7,13 +7,12 @@
 .send-icon {
   cursor: pointer;
 }
-<<<<<<< HEAD
 .req-user {
   background-color: black;
   position: fixed;
   top: 5rem;
   color: white;
-=======
+}
 .chat-header {
   background-color: #675e5e;
   text-align: center;
@@ -28,5 +27,4 @@
   .chat-header {
     margin: 0rem 20rem;
   }
->>>>>>> f1e57b1efac2153673f2e3843b9a944255dfa814
 }
