@@ -1,25 +1,66 @@
 import React from "react";
 import "../styles/chat.css";
+import "../styles/talk.css";
 import { useParams } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
+import { useEffect, useState } from "react";
+import "../styles/talk.css";
+import db from "../firebase";
+import Message from "./Message";
+import TextInput from "./TextInput";
+import Header from "./Header";
+import { useRooms } from "../room-context";
 
 const Talk = () => {
   const { roomId } = useParams();
   console.log(roomId);
+  const {
+    roomState: { searchChatText },
+  } = useRooms();
+  const [roomInfo, setRoomInfo] = useState(null);
+  const [roomMessages, setRoomMessages] = useState([]);
 
+  useEffect(() => {
+    if (roomId) {
+      db.collection("rooms")
+        .doc(roomId)
+        .onSnapshot((snap) => setRoomInfo(snap.data()));
+    }
+
+    db.collection("rooms")
+      .doc(roomId)
+      .collection("messages")
+      .orderBy("timestamp", "asc")
+      .onSnapshot((snap) =>
+        setRoomMessages(snap.docs.map((doc) => doc.data()))
+      );
+  }, [roomId]);
+  console.log(roomInfo);
+  console.log(roomMessages);
+
+  const filteredChatMessages = roomMessages.filter(({ message }) =>
+    message.toLowerCase().includes(searchChatText.toLowerCase())
+  );
   return (
-    <div className='chat-header'>
-      <h1>my room {roomId}</h1>
+    <div className='app-content'>
+      <Header page={"Chat"} />
+      <div className='chat-header'>
+        <h1>Topic: {roomInfo?.name}</h1>
 
-      <div></div>
-      <div className='input-box'>
-        <input
-          className='input-message'
-          type='text'
-          placeholder='Enter your message'
-        />
-        <FontAwesomeIcon icon={faPaperPlane} className='send-icon' />
+        <div className='message-section'>
+          {filteredChatMessages.map(
+            ({ message, user, timestamp, userImage }) => (
+              <Message
+                key={timestamp}
+                message={message}
+                user={user}
+                timestamp={timestamp}
+                userImage={userImage}
+              />
+            )
+          )}
+        </div>
+
+        <TextInput room={roomInfo?.name} id={roomId} />
       </div>
     </div>
   );

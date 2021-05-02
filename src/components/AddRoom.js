@@ -1,10 +1,13 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
+import db from "../firebase"
 
 const AddRoom = () => {
     const [topic, setTopic] = useState("")
 
     const addRoom = () => {
-        console.log(topic)
+        topic && db.collection("rooms").add({
+            name: topic
+        })
     }
 
     return (
