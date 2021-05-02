@@ -4,16 +4,30 @@ import { faHome, faSearch } from "@fortawesome/free-solid-svg-icons";
 import React, { useState } from "react";
 import { useAuth } from "../context/user-context";
 import { useRooms } from "../room-context";
+import { useNavigate } from "react-router";
+
+
 const Header = ({ page }) => {
   const [showUserMenu, setShowUserMenu] = useState(false);
   const { user } = useAuth();
 
+  const navigate = useNavigate()
   const { roomDispatch } = useRooms();
   const findRoomOrMessage = (e) => {
     page === "Rooms"
       ? roomDispatch({ type: "SEARCH_ROOM_TEXT", value: e.target.value })
       : roomDispatch({ type: "SEARCH_CHAT_TEXT", value: e.target.value });
   };
+
+  const logout = () => {
+    localStorage?.removeItem(
+      "userDetails",
+      JSON.stringify({ user: null })
+    )
+    navigate('/')
+  }
+
+
   return (
     <header className='header'>
       <FontAwesomeIcon icon={faHome} />
@@ -33,9 +47,7 @@ const Header = ({ page }) => {
         </span>
         <div class={`user-menu ${showUserMenu ? "show-user-menu" : ""}`}>
           <div>{user?.displayName}</div>
-          <div>Profile</div>
-          <div>Security</div>
-          <div>Logout</div>
+          <div onClick={logout}>Logout</div>
         </div>
       </div>
     </header>

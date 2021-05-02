@@ -22,7 +22,7 @@ const SidebarRooms = () => {
         <div className="discussion-room" key={room.id}>
           <div className="room-header">
             <div className="room-img">
-              <img src=""></img>
+              <img src="" alt=""></img>
             </div>
             <div className="room-info">
               <h2>{room.name}</h2>

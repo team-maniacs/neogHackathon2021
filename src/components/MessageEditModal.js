@@ -2,7 +2,7 @@ import db from "../firebase";
 import { useRooms } from "../room-context";
 
 const MessageEditModal = ({ roomid, id, chats }) => {
-  const { messageModal, roomDispatch } = useRooms();
+  const { roomDispatch } = useRooms();
   const {
     data: { message, user, userImage, timestamp },
   } = chats.find(({ id: chatId }) => chatId === id);
