@@ -5,7 +5,7 @@ import {
   useReducer,
   useRef,
 } from "react";
-import { useParams } from "react-router";
+
 import db from "./firebase";
 const RoomContext = createContext();
 export const manageRooms = (state, action) => {
@@ -35,8 +35,6 @@ export const manageRooms = (state, action) => {
   }
 };
 const RoomProvider = ({ children }) => {
-  const { roomId } = useParams();
-
   const messageModal = useRef(null);
   const [roomState, roomDispatch] = useReducer(manageRooms, {
     rooms: [],

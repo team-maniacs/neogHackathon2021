@@ -3,8 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faHome,
   faSearch,
-  faThumbtack,
-  faUser,
+  
 } from "@fortawesome/free-solid-svg-icons";
 import React, { useState } from "react";
 import { useAuth } from "../context/user-context";
