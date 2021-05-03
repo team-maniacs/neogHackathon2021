@@ -1,10 +1,6 @@
 import "../styles/header.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faHome,
-  faSearch,
-  
-} from "@fortawesome/free-solid-svg-icons";
+import { faComment, faHome, faSearch } from "@fortawesome/free-solid-svg-icons";
 import React, { useState } from "react";
 import { useAuth } from "../context/user-context";
 import { useRooms } from "../room-context";
@@ -21,13 +17,9 @@ const Header = ({ page }) => {
   };
 
   const logout = () => {
-    localStorage?.removeItem(
-      "userDetails",
-      JSON.stringify({ user: null })
-    )
-    navigate('/')
-  }
-
+    localStorage?.removeItem("userDetails", JSON.stringify({ user: null }));
+    navigate("/");
+  };
 
   return (
     <header className='header'>
@@ -36,7 +28,9 @@ const Header = ({ page }) => {
         icon={faHome}
         onClick={() => navigate("/user")}
       />
-      <h1 className='brandName'>Chaupal</h1>
+      <h1 className='brandName'>
+        <FontAwesomeIcon icon={faComment} /> Chaupal
+      </h1>
       <div className='search-bar'>
         <input
           type='search'
